@@ -1,0 +1,97 @@
+\pochhammer{a}{n}&P&open_paren + r'?###open_(\d+)###([^#;]*?)' + close_paren + r'?###close_\1###_(?P<open>{)?([^=\s,]+?)(?(open)})'~-~open_paren + r'?###open_(\d+)###([^=;]+?)###open_(\d+)###([^=;]+?)###close_\3###([^=;]+?)' + close_paren + r'?###close_\1###_(?P<open>{)?([^=s\,]+?)(?(open)})'&r'\pochhammer{\2}{\4}'~-~r'\pochhammer{\2###open_\3###\4###close_\3###\5}{\7}'&Pochhammer's symbol~?~
+
+\qFactorial{a}{q}{n}&qF&r'(?P<open>' + open_paren + r')?###open_(\d+)###([^;()]+);([^;()]+)(?(open)' + close_paren + r')###close_\2###_(?P<open_2>{)?([^=; ]+?)(?(open_2)})'&r'\qFactorial{\3}{\4}{\6}'&$q$-factorial (or $q$-shifted factorial)~?~
+
+\HyperpFq{p}{q}@@{a_1,\dots,a_p}{b_1,\dots,b_q}{z}&Hy&r'\\hyp{?(\d)}?{?(\d)}?{(.+)}{([^{]+)}\s*{(.+)}'~-~r'\\hyp{?(\d)}?{?(\d)}?{(.+)}(\w+)\s*{(.+)}'~-~r'\\hyp(\d)(\d){(.+?)}\s*{([^{]+?)}(\S{,1})'~-~r'\\hyp{(.+?)}{(.+?)}{(.+)}\s*{(.+)}\s*{(.+)}'~-~r'{}_(.?)F_(.?)'&r'\HyperpFq{\1}{\2}@@{\3}{\4}{\5}'~-~r'\HyperpFq{\1}{\2}@@{\3}{\4}{\5}'~-~r'\\HyperpFq{\1}{\2}@@{\3}{\4}{\5}'~-~r'\\HyperpFq{\1}{\2}@@{\3}{\4}{\5}'~-~r'\\HyperpFq{\1}{\2}'&generalized hypergeometric function~?~
+
+\qHyperrphis{r}{s}@@{a_1,\dots,a_r}{b_1,b_2,\dots,b_s}{q}{z}&qHy&r'\\qhyp(\d)(\d){(.*?)}{(.*?)}{(q),(.*?)}'~-~r'\\qhyp(\d)(\d){(.*?)}{([^}]?)}{(q),(.*?)}'~-~r'\\qhyp(\d)(\d){?(.*?)}?([^}]?){(q),(.*?)}'~-~r'\\qhyp(\d)(\d){(.*?)}\s*{(.*?)}{(.*?),(.*?)}'~-~r'\\qhyp{(.*?)}(?P<open>{)?(.*?)(?(open)}){(.*?)}\s*{(.*?)}{(q),(.*?)}'~-~r'\\qhyp{(.+?)}{(.+?)}{(.+)}\s*{(.+)}\s*{(.+)}'~-~r'{}_(.?)\\phi_(.?)'&r'\qHyperrphis{\1}{\2}@@{\3}{\4}{\5}{\6}'~-~r'\qHyperrphis{\1}{\2}@@{\3}{\4}{\5}{\6}'~-~r'\qHyperrphis{\1}{\2}@@{\3}{\4}{\5}{\6}'~-~r'\qHyperrphis{\1}{\2}@@{\3}{\4}{\5}{\6}'~-~r'\qHyperrphis{\1}{\3}@@{\4}{\5}{\6}{\7}'~-~r'\qHyperrphis{\1}{\2}@@{\3}{\4}{q}{\5}'~-~r'\qHyperrphis{\1}{\2}'&basic hypergeometric (or $q$-hypergeometric) function~?~
+
+\qHyperrWs{r}{s}@@{a_1,\dots,a_r}{b_1,b_2,\dots,b_s}{q}{z}&qHw&r'{}_{(.*?)}W_([^(]*?)' + open_paren + r'?###open_(\d+)###([^;]*?);([^;]*?);(q),(.*?)' + close_paren + r'?###close_\3###'&r'\qHyperrWs{\1}{\2}@@{\4}{\5}{\6}{\7}'&very-well-poised $q$-hypergeometric series~?~
+
+\AppellFiv@{\alpha}{\beta}{\gamma}{\gamma'}{x}{y}&A&r'F_4(?P<open>' + open_paren + r')?###open_(\d+)###([^;,]*?),([^,;]*?);([^,;]*?),([^,;]*?);\s*(.*?),([^,;]*?)(?(open)' + close_paren + r')###close_\2###'~-~r'F_4(?P<open>' + open_paren + r')?###open_(\d+)###([^;,]*?),([^,;]*?);([^,;]*?),([^,;]*?);\s*([^,;]*?),(.*)(?(open)' + close_paren + ')###close_\2###'~-~r'\$F_4\$'&r'\AppellFiv@{\3}{\4}{\5}{\6}{\7}{\8}'~-~r'\AppellFiv@{\3}{\4}{\5}{\6}{\7}{\8}'~-~r'$\AppellFiv$'&Appell function~?~
+
+\WilsonW{n}@{x}{a}{b}{c}{d}&W&r'W_(?P<open>{)?(.+)(?(open)})\s*' + open_paren + r'?###open_(\d+)###\s*(?P<_0_arg_1>(?:[^=\s,;|])+);\s*(?P<_0_arg_2>(?:[^=\s,;|])+),\s*(?P<_0_arg_3>(?:[^=\s,;|])+),\s*(?P<_0_arg_4>(?:[^=\s,;|])+),\s*(?P<_0_arg_5>(?:[^=\s,;|])+)' + close_paren + r'?###close_\3###'~-~r'\$W_n\$'&r'\WilsonW{\2}@{\4}{\5}{\6}{\7}{\8}'~-~r'$\WilsonW{n}$'&Wilson polynomial~?~
+
+\AlSalamChiharaQ{n}@{x}{a}{b}{q}&AS&r'Q_(\w+)' + open_paren + r'?###open_(\d+)###(.*?);(.*?),(.*?)\|q' + close_paren + r'?###close_\2###'~-~r'###open_(\d+)###Q_(\w+)Q_(\w+)###close_\1###' + open_paren + r'?###open_(\d+)###(.*?);(.*?),(.*?);q' + close_paren + r'?###close_\1###'&r'\AlSalamChiharaQ{\1}@{\3}{\4}{\5}{q}'~-~r'\AlSalamChiharaQ{\2}@{\5}{\6}{\7}{q}\AlSalamChiharaQ{\3}@{\5}{\6}{\7}{q}'&Al-Salam--Chihara polynomial~?~
+
+\qinvAlSalamChiharaQ{n}@{x}{a}{b}{q^{-1}}&qAS&r'Q_(\w+)' + open_paren + r'?###open_(\d+)###(.*?);(.*?),(.*?)\|q\^{-1}' + close_paren + r'?###close_\2###'&r'\qinvAlSalamChiharaQ{\1}@{\3}{\4}{\5}{q^{-1}}'&$q^{-1}$-Al-Salam--Chihara polynomial~?~
+
+\HahnS{n}@{x}{a}{b}{c}&HS&r'S_(?P<open>{)?([^=\s\n]+?)(?(open)})' + open_paren + r'?###open_(\d+)###([^;,|]*?);([^;,|]*?),([^;,|]*?),([^;,)\s|$]*?)' + close_paren + r'?###close_\3###'~-~r'\$S_(\w+)\$'&r'\HahnS{\2}@{\4}{\5}{\6}{\7}'~-~r'$\HahnS{\1}$'&continuous dual Hahn polynomial~?~
+
+\HahnQ{n}@{x}{\alpha}{\beta}{N}&HQ&r'Q_(?P<open>{)?([^=\s\n]+?)(?(open)})' + open_paren + r'?###open_(\d+)###([^;,|]*?);([^;,|]*?),([^;,|]*?),([^;,)\s|$]*?)' + close_paren + r'?###close_\3###'~-~r'\$Q_(\w+)\$'&r'\HahnQ{\2}@{\4}{\5}{\6}{\7}'~-~r'$\HahnQ{\1}$'&Hahn polynomial~?~
+
+\HahnR{n}@{x}{\gamma}{\delta}{N}&HR&r'R_(?P<open>{)?([^=\s\n]+?)(?(open)})' + open_paren + r'?###open_(\d+)###([^;,|]*?);([^;,|]*?),([^;,|]*?),([^;,)\s|$]*?)' + close_paren + r'?###close_\3###'~-~r'\$R_(\w+)\$'&r'\HahnR{\2}@{\4}{\5}{\6}{\7}'~-~r'$\HahnR{\1}$'&dual Hahn polynomial~?~
+
+\qHahnR{n}@{x}{\alpha}{\beta}{N}{q}&qHR&r'R_(?P<open>{)?([^=\s\n]+?)(?(open)})' + open_paren + r'?###open_(\d+)###([^;,|]*?);([^;,|]*?),([^;,|]*?),([^;,)\s|$]*?)\|([^;,|)\s]*?)' + close_paren + r'?###close_\3###'&r'\qHahnR{\2}@{\4}{\5}{\6}{\7}{\8}'&dual $q$-Hahn polynomial~?~
+
+\qJacobip{n}@{x}{a}{b}{q}&qJ&r'P_(?P<open>{)?(.+?)(?(open)})\^{###open_(\d+)###(.*?),(.*?)###close_\3###}###open_(\d+)###(.*?)\|(.*?)###close_\6###'&r'\qJacobip{\2}@{\7}{\4}{\5}{\8}'&little $q$-Jacobi polynomial~?~
+
+\JacobiP{\alpha}{\beta}{n}@{x}&JP&r'P_(?P<open>{)?(.+?)(?(open)})\^{###open_(\d+)###(.*?),(.*?)###close_\3###}(?P<open_1>' + open_paren + r')?###open_(\d+)###(.*?)(?(open_1)' + close_paren + r')###close_\7###'&r'\JacobiP{\4}{\5}{\2}@{\8}'&Jacobi polynomial~?~
+
+\JacobiR{\alpha}{\beta}{n}@{x}&JR&r'R_(?P<open>{)?(.+?)(?(open)})\^{###open_(\d+)###(.*?),(.*?)###close_\3###}(?P<open_1>' + open_paren + r')?###open_(\d+)###(.*?)(?(open_1)' + close_paren + r')###close_\7###'&r'\JacobiR{\4}{\5}{\2}@{\8}'&normalized Jacobi polynomial~?~
+
+\AskeyWilsonp{n}@{x}{a}{b}{c}{d}{q}&AW&r'p_(\w+)' + open_paren + r'?###open_(\d+)###(.*?);(.*?),(.*?),(.*?),(.*?)\|(.*?)' + close_paren + r'?###close_\2###'&r'\AskeyWilsonp{\1}@{\3}{\4}{\5}{\6}{\7}{\8}'&Askey-Wilson polynomial~?~
+
+\RacahR{n}@{x}{\alpha}{\beta}{\gamma}{\delta}&R&r'R_(?P<open>{)?(.+?)(?(open)})' + open_paren + r'?###open_(\d)###([^|]+?);\s*([^|]+?)\s*,\s*([^|]+?)\s*,\s*([^|]+?)\s*,\s*([^|]+?)' + close_paren + r'?###close_\3###'&r'\RacahR{\2}@{\4}{\5}{\6}{\7}{\8}'&Racah polynomial~?~
+
+\qRacahR{n}@{x}{\alpha}{\beta}{\gamma}{\delta}{q}&qR&r'R_(?P<open>{)?(.+?)(?(open)})' + open_paren + r'?###open_(\d+)###([^()]*?);([^)(]*?),([^()]*?),([^()]*?),([^()]*?)\|([^()]*?)' + close_paren + r'?###close_\3###'&r'\qRacahR{\2}@{\4}{\5}{\6}{\7}{\8}{\9}'&$q$-Racah polynomial~?~
+
+\KrawtchoukK{n}@{x}{p}{N}&K&r'K_(?P<open>{)?(.+?)(?(open)})' + open_paren + r'?###open_(\d+)###([^;,]*?);([^;,]*?),([^ |;,]*?)' + close_paren + r'?###close_\3###'&r'\KrawtchoukK{\2}@{\4}{\5}{\6}'&Krawtchouk polynomial~?~
+
+\HermiteH{n}@{x}&H&r'H_(?P<open>{)?([^=]+?)(?<!\mu)(?(open)})' + open_paren + r'?###open_(\d+)###(.*?)' + close_paren + r'?###close_\3###'&r'\HermiteH{\2}@{\4}'&Hermite polynomial Hn~?~
+
+\qHermitehI{n}@{x}{q}&qH&r'(?<!\\wt\s)h_(.)' + open_paren + r'?###open_(\d+)###([^;]*?);(.+?)' + close_paren + r'?###close_\2###'~-~r'(?<!\\wt\s)h_{([^=]+?)}' + open_paren + r'?###open_(\d+)###([^;]*?);(.*?)' + close_paren + r'?###close_\3###'&r'\qHermitehI{\1}@{\3}{\4}'~-~r'\qHermitehI{\2}@{\4}{\5}'&discrete $q$-Hermite I polynomial~?~
+
+\qHermitehII{n}@{x}{q}&qH2&r'\\wt\sh_(?P<open>})(.+?)(?(open)})' + open_paren + r'?###open_(\d+)###([^;]*?);(.*?)' + close_paren + r'?###close_\3###'&r'\qHermitehII{\2}@{\4}{\5}'&discrete $q$-Hermite II polynomial~?~
+
+\LaguerreL[\alpha]{n}@{x}&L&r'\$L_(?P<open_sub>})?(.+?)(?(open_sub)})\^(?P<open_sup>{)?(?P<open_paren>###open_(\d+)###)?(.+?)(?(open_paren)###close_\5###)(?(open_sup)})\$'~-~r'L_(?P<open_sub>{)?(.+?)(?(open_sub)})\^(?P<open_sup>{)?([^;$]+?)(?(open_sup)})###open_(\d+)###([^;$]+?)###close_\5###'&r'$\LaguerreL[\6]{\2}$'~-~r'\LaguerreL[\4]{\2}@{\6}'&Laguerre (or generalized Laguerre) polynomial~?~
+
+\qLaguerreL{\alpha}{n}@{x}{q}&qL&r'L_(?P<open_sub>{)?(.+?)(?(open_sub)})\^(?P<open_sup>{)?([^=]+?)(?(open_sup)})' + open_paren + r'?###open_(\d+)###([^;]+?);([^=]+?)' + close_paren + r'?###close_\5###'&r'\qLaguerreL{\4}{\2}@{\6}{\7}'&$q$-Laguerre polynomial~?~
+
+\Ultraspherical{\lambda}{n}@{x}&U&r'C_(?P<open_sub>{)?(.+?)(?(open_sub)})\^(?P<open_sup>{)?([^ |]*?)(?(open_sup)})###open_(\d+)###([^;]*?)###close_\5###'&r'\Ultraspherical{\4}{\2}@{\6}'&ultraspherical (or Gegenbauer) polynomial~?~
+
+\qUltraspherical{n}@{x}{\beta}{q}&qU&r'C_(?P<open>{)?(.+?)(?(open)})' + open_paren + r'?###open_(\d+)###([^;]*?);(.*?)\|(.*?)' + close_paren + r'?###close_\3###'&r'\qUltraspherical{\2}@{\4}{\5}{\6}'&continuous $q$-ultraspherical polynomial~?~
+
+\qUltrasphericale{n}@{x}{\beta}{q}&qUe&r'C_(?P<open>{)?(.+?)(?(open)})\[([^;]*?);(.*?)\|(.*?)\]'&r'\qUltrasphericale{\2}@{\3}{\4}{\5}'&exponential argument Rogers polynomial~?~
+
+\MeixnerM{n}@{x}{\beta}{c}&M&r'M_(?P<open>{)?(.+?)(?(open)})' + open_paren + r'?###open_(\d+)###([^;,]*?);([^;,]*?),([^;,]*?)' + close_paren + r'?###close_\3###'&r'\MeixnerM{\2}@{\4}{\5}{\6}'&Meixner polynomial~?~
+
+\qKrawtchoukK{n}@{x}{p}{N}{q}&qK&r'K_(?P<open>{)?(.+?)(?(open)})' + open_paren + r'?###open_(\d+)###([^;,]*?);([^;,]*?),([^\|;,]*?)\|([^\|;,]*?)' + close_paren + r'?###close_\3###'&r'\qKrawtchoukK{\2}@{\4}{\5}{\6}{\7}'&$q$-Krawtchouk polynomial~?~
+
+\GenGegenbauerS{\alpha}{\beta}{m}@{x}&G&r'S_(?P<open>{)?([^=]+?)(?(open)})\^{###open_(\d+)###([^,]+?),([^,]+?)###close_\3###}' + open_paren + r'?###open_(\d+)###(.*?)' + close_paren + r'?###close_\6###'~-~r'S_(?P<open>{)?([^=]+)(?(open)})\^{###open_(\d+)###([^,]*?),([^,]*?)###close_\3###}'&r'\GenGegenbauerS{\4}{\5}{\2}@{\7}'~-~r'\GenGegenbauerS{\4}{\5}{\2}'&Generalized Gegenbauer Polynomial~?~
+
+\BesselJ{\nu}@{z}&BJ&r'J_(?P<open>{)?(.+?)(?(open)})' + open_paren + r'?###open_(\d+)###(.+?)' + close_paren + r'?###close_\3###'&r'\BesselJ{\2}@{\4}'&Bessel function of the first kind~?~
+
+\EulerGamma@{z}&EG&r'\\Ga(?:mma)?###open_(\d+)###(.+?)###close_\1###'&r'\EulerGamma@{\2}'&Euler's gamma function~?~
+
+\qGamma{q}@{z}&qG&r'\\Gamma_q' + open_paren + r'?###open_(\d+)###(.*?)' + close_paren + r'?###close_\1###'&r'\\qGamma{q}@{\2}'&$q$-gamma function~?~
+
+\qBinomial{n}{m}{q}&qB&r'\\genfrac{\[}{\]}{0pt}{}{(.+?)}{(.+?)}_q'&r'\\qBinomial{\1}{\2}{q}'&$q$-binomial coefficient (or Gaussian polynomial)~?~
+
+\qexp{q}@{x}&qexp&r'\\e_q' + open_paren + r'?###open_(\d+)###([^= _]+)' + close_paren + r'?###close_\1###'&r'\\qexp{q}@{\2}'&$q$-exponential function eq~?~
+
+\qExp{q}@{x}&qExp&r'\\E_q' + open_paren + r'?###open_(\d+)###([^= _]+)' + close_paren + r'?###close_\1###'&r'\\qExp{q}@{\2}'&$q$-exponential function Eq~?~
+
+\qcos{q}@{x}&qcos&r'\\cos_q' + open_paren + r'?###open_(\d+)###(.+?)' + close_paren + r'?###close_\1###'&r'\\qcos{q}@{\2}'&$q$-cosine function cosq~?~
+
+\qCos{q}@{x}&qCos&r'\\textrm{Cos}_q' + open_paren + r'?###open_(\d+)###(.+?)' + close_paren + r'?###close_\1###'&r'\\qCos{q}@{\2}'&$q$-cosine function Cosq~?~
+
+\qsin{q}@{x}&qsin&r'\\sin_q' + open_paren + r'?###open_(\d+)###(.+?)' + close_paren + r'?###close_\1###'&r'\\qsin{q}@{\2}'&$q$-sine function sinq~?~
+
+\qSin{q}@{x}&qSin&r'\\textrm{Sin}_q' + open_paren + r'?###open_(\d+)###(.+?)' + close_paren + r'?###close_\1###'&r'\\qSin{q}@{\2}'&$q$-sine function Sinq~?~
+
+\Kronecker{j}{k}&Kn&r'\\delta_{(.?)(.?)}'&r'\\Kronecker{\1}{\2}'&Kronecker delta~?~
+
+\EulerBeta@{a}{b}&EB&r'\\textrm{B}###open_(\d+)###([^,]+?),([^,]+?)###close_\1###'&r'\\EulerBeta@{\2}{\3}'&beta function~?~
+
+\ChebyT{n}@{x}&CT&r'T_{(.+?)}' + open_paren + r'?###open_(\d+)###\s*(.+?)\s*' + close_paren + r'?###close_\2###'~-~r'T_(.)' + open_paren + r'?###open_(\d+)###\s*(.+?)\s*' + close_paren + r'?###close_\2###'&r'\ChebyT{\1}@{\3}'~-~r'\ChebyT{\1}@{\3}'&Chebyshev polynomial of the first kind~?~
+
+\ChebyU{n}@{x}&CU&r'U_(?P<open>{)?(.+?)(?(open)})' + open_paren + r'?###open_(\d+)###\s*(.+?)\s*' + close_paren + r'?###close_\3###'&r'\ChebyU{\2}@{\4}'&Chebyshev polynomial of the second kind~?~
+
+\MeixnerPollaczekP{\lambda}{n}@{x}{\phi}&MP&r'P_(?P<open>{)?([^=_;]+?)(?(open)})\^{###open_(\d+)###([^=_;]+)###close_(\*)###}\s*' + open_paren + r'?###open_(?P<num>\d+)###([^;]+?);([^;]+?)' + close_paren + r'?###close_(\g<num>)###'&r'\\MeixnerPollaczekP{\3}{\2}@{\5}{\6}'&Meixner-Pollaczek polynomial~?~
+
+\Hahnp{n}@{x}{a}{b}{\conj{a}}{\conj{b}}&Hp&r'p_(?P<open>{)?([^=]+?)(?(open)})' + open_paren + r'?###open_(?P<num>\d+)###([^;,|]+?);([^;,|]+?),([^;,|]+?),([^;,|]+?),([^;,|]+?)' + close_paren + r'?###close_\3###'&r'\Hahnp{\2}@{\4}{\5}{\6}{\7}{\8}'&continuous Hahn polynomial~?~
+
+\BesselPolyy{n}@{x}{a}&BPy&r'y_(?P<open>{)?([^=_ ]+?)(?(open)})' + open_paren + r'?###open_(?P<num>\d+)###([^;]+?);([^;]+?)' + close_paren + r'?###close_(\g<num>)###'&r'\BesselPolyy{\2}@{\4}{\5}'&Bessel polynomial~?~
+
+\qderiv[n]{q}@{z}&qD&r'\$\\mathcal{D}_q\$'~-~r'\\mathcal{D}_q\^(?P<open_sup>{)?(.+?)(?(open_sup)})(?P<open_brac>\\left[)?f###open_(\d+)###(.+?)###close_\4###(?(open_brac)\\right])'~-~r'\\mathcal{D}_q\^(?P<open>{)?(.+?)(?(open)})f'~-~r'\\mathcal{D}_q(?P<open>\\left\[)?f###open_(\d+)###(.+?)###close_\2###(?(open)\\right\])'&r'$\qderiv{q}$'~-~r'\qderiv[\2]{q}@{\5}'~-~r'\qderiv[\2]{q}'~-~r'\qderiv{q}@{\3}'&q derivative~?~
