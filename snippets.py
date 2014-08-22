@@ -2,7 +2,7 @@
 
 from collections import defaultdict
 
-_whitespace = r'(?: |\\quad|\\qquad|\\!|\\,|\\t|\\n|\\:|\\;|\\\s|)'               #regex for matching whitespace
+whitespace = r'(?: |\\quad|\\qquad|\\!|\\,|\\t|\\n|\\:|\\;|\\\s|)'               #regex for matching whitespace
 valid = r'(?:[^=s,;|])'                                                    #regex for matching valid characters within another element
 open_paren = r'(?:\\left|\\Bigg|\\bigg|\\big|\\Big|\\bigl)'         #regex for matching opening parentheses
 close_paren = r'(?:\\right|\\Bigg|\\bigg|\\big|\\Big|\\bigr)'       #regex for matching closing parentheses

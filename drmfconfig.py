@@ -46,7 +46,7 @@ class ConfigFile(object):
             #  print(chunk + '\n')
             chunk = chunk[:-3]
             try:
-                macro, abbr, regexes, replacements, description = chunk.split("&")
+                macro, abbr, regexes, replacements, description = chunk.split("`")
             except ValueError as ve:
                 print("ValueError: {0}".format(ve))
                 print(chunk)
