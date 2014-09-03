@@ -2,7 +2,7 @@
 """This module contains the code for the 'replace' functionality of the DRMF seeding program."""
 
 import identifiers
-import Common
+#import Common
 import sys
 import re
 import os
@@ -30,7 +30,7 @@ def run(inputfile, outputfile, all_funcs):
     file = open(inputfile,"r")
     content = file.read()
 
-    content = parentheses.remove_parentheses(content)
+#    content = parentheses.remove_parentheses(content)
 
     #Header replacements
     content = content.replace(r'\usepackage{amssymb}', '\\usepackage{amsfonts}\n%\\usepackage{breqn}\n\\usepackage{DLMFmath}\n\\usepackage{DRMFfcns}\n\\usepackage{amssymb}')
@@ -40,7 +40,7 @@ def run(inputfile, outputfile, all_funcs):
     #Makes replacements
     content = replace_all(content, all_funcs)
 
-    content = parentheses.insert_parentheses(content)
+#    content = parentheses.insert_parentheses(content)
 
     #Writes the converted string into the output file
     file2 = open(outputfile,"w")
