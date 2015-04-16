@@ -4,7 +4,7 @@ This project inserts DLMF and DRMF macros into unprocesssed TeX based on the reg
 
 ##Usage
 
-To make the replacements, you should run replace.py with the input and output files as arguments. The `-c` option allows you to specify a configuration file other than `function_regex.txt`. 
+To make the replacements, you should run `drmfdriver.py` with the input and output files as arguments. The `-c` option allows you to specify a configuration file other than `function_regex.txt`. 
 
 ###Regular Expressions
 
