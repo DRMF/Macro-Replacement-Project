@@ -8,7 +8,7 @@ import re
 import os
 from snippets import *
 from function import Function
-import parentheses
+#import parentheses
 
 #Changes the '\mid ' to '|'
 def replacemid(content):
