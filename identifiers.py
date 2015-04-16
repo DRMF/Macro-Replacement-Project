@@ -17,16 +17,31 @@ def searchAll(match):
     return tempstring
 
 def _replace(match):
+
+    pattern = re.compile(r'\\end{' + match.group(1) + '}')
+    if (re.search(pattern, match.group(2)) != None or re.search(pattern, match.group(3)) != None):
+        return match.group()
+
     tempstring = '\\begin{' + match.group(1) + '}\\label{' + match.group(3) + '}%'
     tempstring += searchAll(match.group(2))
     tempstring += match.group(2) + '\\end{' + match.group(1) + '}'
+    return tempstring
+
+def _replace2(match):
+    pattern = re.compile(r'\\label{')
+    if (re.search(pattern, match.group(2)) != None):
+        return match.group()
+    tempstring = '\\begin{' + match.group(1) + '}%'
+    tempstring += searchAll(match.group(2))
+    tempstring += match.group(2) + '\n\\end{' + match.group(1) + '}'
     return tempstring
 
 def replace2(match):
     tempstring = '\\begin{' + match.group(1) + '}\\label{' + match.group(3) + '}%'
     pattern = re.compile(r'\\nonumber')
     pattern2 = re.compile(r'\\label{')
-    if (re.search(pattern, match.group(2)) != None or re.search(pattern2, match.group(2)) != None):
+    pattern3 = re.compile(r'\\end{')
+    if (re.search(pattern, match.group(2)) != None or re.search(pattern2, match.group(2)) != None or re.search(pattern3, match.group(2)) != None):
         return match.group()
     tempstring += searchAll(match.group(2))
     tempstring += match.group(2)
@@ -129,13 +144,16 @@ def eqnarray_rpl1(match):
 def eqnarray_rpl2(match):
     tempstring = '\\\\\n\\nonumber%'
     tempstring += searchAll(match.group(1))
-    tempstring += "\n" + match.group(1) + match.group(2)
-
+    if (re.match('\n', match.group(1)) == None):
+        tempstring += '\n'
+    tempstring += match.group(1) + match.group(2)
     return tempstring
 
 def eqnarray_rpl3(match):
     tempstring = '\\\\\n\\nonumber%'
     tempstring += searchAll(match.group(1))
+    if (re.match('\n', match.group(1)) == None):
+        tempstring += '\n'
     tempstring += match.group(1)
     return tempstring
 
@@ -143,9 +161,9 @@ def eqnarray_replace(match):
 
     matchstring = match.group()
 
-    pattern1 = re.compile(r'\\begin{(eqnarray)}\s*\\label{(.*?)}(.*?)(\s*\\end{\1}|\\nonumber)', re.DOTALL)
+    pattern1 = re.compile(r'\\begin{(eqnarray)}\s*\\label{(.*?)}\s*(.*?)(\s*\\end{\1}|\\nonumber)', re.DOTALL)
     pattern2 = re.compile(r'\\nonumber\\\\\s+(.*?)(\s*\\end{eqnarray}|\\nonumber)', re.DOTALL)
-    pattern3 = re.compile(r'(?<!\\nonumber)\\\\(.+?)(?<!\n)\\nonumber', re.DOTALL)
+    pattern3 = re.compile(r'(?<!\\nonumber)\\\\\s*(.+?)(?<!\n)\\nonumber', re.DOTALL)
 
     matchstring = re.sub(pattern1, eqnarray_rpl1, matchstring)
     matchstring = re.sub(pattern3, eqnarray_rpl3, matchstring)
@@ -156,12 +174,18 @@ def eqnarray_replace(match):
 
 
 def replacestar(match):
+    pattern = re.compile(r'\\label{')
+    if (re.search(pattern, match.group(2)) != None):
+        return match.group()
     tempstring = '\\begin{' + match.group(1) + '}%'
     tempstring += searchAll(match.group(2))
+    if (re.match('\n', match.group(2)) == None):
+        tempstring += '\n'
     tempstring += match.group(2) + '\n\\end{' + match.group(1) + '}'
     return tempstring
 
 def equation_replace_kk(match):
+
     tempstring = '\\begin{' + match.group(1) + '}\\label{' + match.group(2) + r'}%'
     tempstring += searchAll(match.group(3))
     tempstring += '\n' + match.group(3) + '\\end{' + match.group(1) + '}'
@@ -172,16 +196,20 @@ def LabelAll(content, functions):
     global all_funcs
     all_funcs = functions
     #searches and moves labels
-    #{equation} -- Koornwinder
-    equationpattern = re.compile(r'\\begin{(equation)}(.*?)\\label{(.*?)}\n\\end{equation}', re.DOTALL)
-    content = re.sub(equationpattern, _replace, content)
-
     #{equation} -- Koekoek
     equationpattern = re.compile(r'\\begin{(equation)}\s+\\label{(.*?)}\s*(.*?)\\end{\1}', re.DOTALL)
     content = equationpattern.sub(equation_replace_kk, content)
 
-    equationpattern = re.compile(r'\\begin{(equation)}(?!\\label)(.*?)\s*\\end{\1}', re.DOTALL)
+    equationpattern = re.compile(r'\\begin{(equation)}(?!\\label)\s*(.*?)\s*\\end{\1}', re.DOTALL)
     content = equationpattern.sub(replacestar, content)
+
+    #{equation} -- Koornwinder
+    #equationpattern = re.compile(r'\\begin{(equation)}(.*?)\n\\end{equation}', re.DOTALL)
+    #content = re.sub(equationpattern, _replace2, content)
+
+    #FIX THIS
+    #equationpattern = re.compile(r'\\begin{(equation)}(.*?)\\label{(.*?)}\n\\end{equation}', re.DOTALL)
+    #content = re.sub(equationpattern, _replace, content)
 
     #{equation*}
     eqstarpattern = re.compile(r'\\begin{(equation\*)}(.*?)\n\\end{equation\*}', re.DOTALL)
@@ -200,7 +228,7 @@ def LabelAll(content, functions):
     content = re.sub(eqnarraypattern, eqnarray_replace, content)
 
     #{eqnarray*}
-    eqnstarpattern = re.compile(r'\\begin{(eqnarray\*)}(.*?)\s\\end{\1}', re.DOTALL)
+    eqnstarpattern = re.compile(r'\\begin{(eqnarray\*)}\s*(.*?)\n\\end{eqnarray\*}', re.DOTALL)
     content = re.sub(eqnstarpattern, replacestar, content)
     
     #{align}
@@ -208,5 +236,9 @@ def LabelAll(content, functions):
     content = re.sub(alignpattern, replacealign, content)
     checkalignpattern = re.compile(r'\n\n\\end{align}', re.DOTALL)
     content = re.sub(checkalignpattern, r'\n\\end{align}', content)
+
+    #{align*}
+    alignstarpattern = re.compile(r'\\begin{(align\*)}(.*?)\n\\end{align\*}', re.DOTALL)
+    content = re.sub(alignstarpattern, replacestar, content)
     
     return content

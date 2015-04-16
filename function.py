@@ -61,10 +61,9 @@ class Function(object):
         init_len = len(match)
 
         and_pat = re.compile(r'(?<!\\)&')
-        match = and_pat.sub('', match)
 
         if and_pat.findall(match):
-        
+            match = and_pat.sub('', match)
             match = "&" + match
 
         return match
@@ -120,6 +119,11 @@ class Function(object):
 
         #use each regex to count occurences
         for regex in self._regexes:
+
+            if regex is r'\(Q_(\w+)Q_(\w+)\)(?:\\left|\\Bigg|\\bigg|\\big|\\Big|\\bigl)?\((.*?);(.*?),(.*?);q(?:\\right|\\Bigg|\\bigg|\\big|\\Big|\\bigr)?\)':
+                print('hi')
+                occurences += 2
+                continue
              
             regex = re.compile(regex)
             occurences += len(regex.findall(lines))

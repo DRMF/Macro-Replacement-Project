@@ -1,0 +1,31 @@
+09out.tex:\section{Wilson} {\\tilde{W}}_(?P<open>{)?([^=_^;,|$]+?)(?(open)})\(([^=;,|$]+?)\)
+09out.tex:\section{Racah} R_(?P<open>{)?([^=_^;,|$]+?)(?(open)})\(([^=;,|$]+?)\)(?!\))
+09out.tex:\section{Continuous dual Hahn} {\\tilde\s{S}}_(?P<open>{)?([^=_^;,|$]+?)(?(open)})\(([^=;,|$]+?)\)
+09out.tex:\section{Continuous Hahn} \\tilde{p}_(?P<open>{)?([^=_^;,|$]+?)(?(open)})\(([^=;,|$]+?)\)
+09out.tex:\section{Hahn} Q_(?P<open>{)?([^= ^_,;|$]+?)(?(open)})\(([^=;,|$]+?)\)
+09out.tex:\section{Dual Hahn} R_(?P<open>{)?([^=_^;,|$]+?)(?(open)})\(([^=;,|$]+?)\)(?!\))
+14out.tex:\section{Askey-Wilson} normAskeyWilsonptilde
+14out.tex:\section{$q$-Racah} Racah?qRacah?
+14out.tex:\section{Continuous dual $q$-Hahn} normAskeyWilsonptilde SHOULD BE normctsdualqHahnptilde
+14out.tex:\section{Continuous $q$-Hahn} normAskeyWilsonptilde SHOULD BE normctsqHahnptilde
+14out.tex:\section{Big $q$-Jacobi} bigqJacobi -- already converted correctly
+14out.tex:\subsection{Big $q$-Legendre} bigqLegendre -- already converted correctly
+14out.tex:\section{$q$-Hahn} qHahn
+14out.tex:\section{Dual $q$-Hahn} Racah SHOULD BE dualqHahn
+14out.tex:\section{Al-Salam-Chihara} qHahn SHOULD BE ???????????
+14out.tex:\section{$q$-Meixner-Pollaczek} qMeixnerPollaczek -- already converted correctly?
+14out.tex:\section{Continuous $q$-Jacobi} normctsqJacobiPtilde
+14out.tex:\subsection{Continuous $q$-ultraspherical / Rogers} ctsqUltra -- already converted correctly?
+14out.tex:\subsection{Continuous $q$-Legendre} ctsqLegendre -- already converted correctly?
+14out.tex:\section{Big $q$-Laguerre} bigqLaguerre -- already converted correctly?
+14out.tex:\section{Little $q$-Jacobi} littleqJacobi -- already converted correctly?
+14out.tex:\section{Little $q$-Legendre} littleqLegendre -- already converted correctly?
+14out.tex:\section{$q$-Meixner} qMeixner
+14out.tex:\section{Quantum $q$-Krawtchouk} qtmqKrawtchouk
+14out.tex:\section{$q$-Krawtchouk} K_n(q^{-x})
+14out.tex:\section{Affine $q$-Krawtchouk} AffqKrawtchouk
+14out.tex:\section{Dual $q$-Krawtchouk} qKrawtchouk
+14out.tex:\section{Continuous big $q$-Hermite} ctsbigqHermite -- already converted correctly?
+14out.tex:\section{Continuous $q$-Laguerre} ctsqLaguerre -- already converted correctly?
+CONTINUE PLS
+

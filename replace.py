@@ -8,7 +8,9 @@ import re
 import os
 from snippets import *
 from function import Function
-#import parentheses
+from replace_special import remove_special
+from monics import replace_monics
+import parentheses
 
 #Changes the '\mid ' to '|'
 def replacemid(content):
@@ -39,6 +41,8 @@ def run(inputfile, outputfile, all_funcs):
 
     #Makes replacements
     content = replace_all(content, all_funcs)
+    content = replace_monics(content)
+    content = remove_special(content)
 
 #    content = parentheses.insert_parentheses(content)
 
